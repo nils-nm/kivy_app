@@ -1,0 +1,149 @@
+WindowManager:
+    MainWindow:
+    CalcWindow:
+    ChoiceWindow:
+    InfoWindow:
+
+# calc_lab: calc_lab
+
+# b7: b7
+# b8: b8
+# b9: b9
+# bX: bX
+# b4: b4
+# b5: b5
+# b6: b6
+# b-: b-
+# b3: b3
+# b2: b2
+# b1: b1
+# b+: b+
+# b**: b**
+# b0: b0
+# b.: b.
+# b=: b=
+
+
+<MainWindow>:
+    name: "main"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: 75, 100, 75, 75
+        spacing: 50
+
+        Button:
+
+            text: "Формулы"
+            font_size: "32sp"
+        Button:
+
+            text: "Калькулятор"
+            font_size: "32sp"
+            on_release:
+                app.root.current = "calc"
+                root.manager.transition.direction = "left"
+
+        BoxLayout:
+            padding: 100, 100, 100, 0
+            spacing: 50
+            ToggleButton:
+                text: "Ru"
+                state: "down"
+                group: "lang"
+
+            ToggleButton:
+                text: "En"
+                group: "lang"
+
+
+
+<CalcWindow>:
+    name: "calc"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 25
+        Button:
+            text: "назад"
+            size_hint: 0.2, 0.1
+            font_size: "16sp"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        Label:
+            id: "calc_lab"
+            text: "0"
+            font_size: "32sp"
+            halign: "right"
+            valign: "center"
+            size_hint: 1, 0.3
+            text_size: root.width - 50, root.height * 0.3 - 50
+        GridLayout:
+            spacing: 3
+            size_hint: 1, 0.6
+            cols: 4
+
+            Button:
+                id: "b7"
+                text: "7"
+                on_release:
+                    root.add_number(7)
+            Button:
+                id: "b8"
+                text: "8"
+            Button:
+                id: "b9"
+                text: "9"
+            Button:
+                id: "bX"
+                text: "X"
+            Button:
+                id: "b4"
+                text: "4"
+            Button:
+                id: "b5"
+                text: "5"
+            Button:
+                id: "b6"
+                text: "6"
+            Button:
+                id: "b-"
+                text: "-"
+            Button:
+                id: "b1"
+                text: "1"
+            Button:
+                id: "b2"
+                text: "2"
+            Button:
+                id: "b3"
+                text: "3"
+            Button:
+                id: "b+"
+                text: "+"
+            Button:
+                id: "b**"
+                text: "**"
+            Button:
+                id: "b0"
+                text: "0"
+            Button:
+                id: "b."
+                text: "."
+            Button:
+                id: "b="
+                text: "="
+
+
+
+
+<ChoiceWindow>:
+    name: "choice"
+
+
+<InfoWindow>:
+    name: "info"
+
+
