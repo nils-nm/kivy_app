@@ -1,3 +1,3 @@
 # kivy_app
 
-my ffirst kivy priject
+my first kivy project
