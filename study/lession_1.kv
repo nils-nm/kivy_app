@@ -1,0 +1,32 @@
+<FirstWindow>:
+    name: "first"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "first window"
+            font_size: "32sp"
+
+        Button:
+            text: "next screen"
+            font_size: "32sp"
+            on_realise:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+<SecondWindow>:
+    name: "second"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "second window"
+            font_size: "32sp"
+
+        Button:
+            text: "go back"
+            font_size: "32sp"
+            on_realise:
+                app.root.current = "first"
+                root.manager.transition.direction = "right"
