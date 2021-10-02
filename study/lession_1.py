@@ -5,10 +5,16 @@ from kivy.uix.boxlayout import BoxLayout
 # from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import ObjectProperty
 
 
 class FirstWindow(Screen):
-    pass
+    but = ObjectProperty()
+    lab = ObjectProperty()
+
+    def change_text(self):
+        self.lab.text = self.but.text
+        return self.lab.text
 
 
 class SecondWindow(Screen):

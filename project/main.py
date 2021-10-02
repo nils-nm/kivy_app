@@ -6,6 +6,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
+from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 
@@ -40,6 +41,8 @@ class MyApp(App, CalcWindow):
         super().__init__()
         self.formula = "0"
 
+    calc_label = ObjectProperty()
+
     def add_number(self, instance):
         if self.formula == "0":
             self.formula = ""
@@ -55,7 +58,7 @@ class MyApp(App, CalcWindow):
         self.update_label()
 
     def update_label(self):
-        CalcWindow().Label.text = self.formula
+        CalcWindow.BoxLayout.Label.text = self.formula
 
 
 if __name__ == "__main__":

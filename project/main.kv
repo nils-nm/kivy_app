@@ -42,7 +42,7 @@ WindowManager:
             text: "Калькулятор"
             font_size: "32sp"
             on_release:
-                app.root.current = "calc"
+                app.root.current = CalcWindow()
                 root.manager.transition.direction = "left"
 
         BoxLayout:
@@ -60,7 +60,8 @@ WindowManager:
 
 
 <CalcWindow>:
-    name: "calc"
+
+    calc_lab: calc_lab
 
     BoxLayout:
         orientation: "vertical"
@@ -73,7 +74,7 @@ WindowManager:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
         Label:
-            id: "calc_lab"
+            id: calc_lab
             text: "0"
             font_size: "32sp"
             halign: "right"
