@@ -8,14 +8,54 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from math import *
 
 
 class MainWindow(Screen):
-    pass
+    def Ru_En(self, lang):
+        pass
 
 
 class CalcWindow(Screen):
-    pass
+    calc_lab = ObjectProperty()
+    formula = '0'
+
+    def add_number(self, instance):
+        print(instance)
+        if self.formula == "0":
+            self.formula = ""
+
+        self.formula += instance
+        self.update_label()
+
+    def add_operation(self, instance):
+        if str(instance).lower() == 'x':
+            self.formula += '*'
+        else:
+            self.formula += str(instance)
+        self.update_label()
+
+    def calc_result(self, instance):
+
+        self.calc_lab.text = str(eval(self.calc_lab.text))
+        self.formula = "0"
+
+    def clear_text(self):
+        self.formula = '0'
+        self.update_label()
+
+#    def sqrt_text(self):
+#        try:
+#            self.calc_lab.text = int(self.calc_lab.text)
+#
+#        except:
+#            self.calc_lab.text = str(eval('sqrt(self.calc_lab.text)'))
+#        finally:
+#            self.update_label()
+
+    def update_label(self):
+        print(self.formula)
+        self.calc_lab.text = self.formula
 
 
 class ChoiceWindow(Screen):
@@ -33,32 +73,10 @@ class WindowManager(ScreenManager):
 kv = Builder.load_file("main.kv")
 
 
-class MyApp(App, CalcWindow):
+class MyApp(App):
+
     def build(self):
         return kv
-
-    def __init__(self):
-        super().__init__()
-        self.formula = "0"
-
-    calc_label = ObjectProperty()
-
-    def add_number(self, instance):
-        if self.formula == "0":
-            self.formula = ""
-
-        self.formula += str(instance)
-        self.update_label()
-
-    def add_operation(self, instance):
-        if str(instance).lower() == 'x':
-            self.formula += '*'
-        else:
-            self.formula += str(instance)
-        self.update_label()
-
-    def update_label(self):
-        CalcWindow.BoxLayout.Label.text = self.formula
 
 
 if __name__ == "__main__":
