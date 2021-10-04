@@ -22,29 +22,26 @@ WindowManager:
 # b0: b0
 # b.: b.
 # b=: b=
-
-
 <MainWindow>:
     name: "main"
-
+    but_form: but_form
+    but_calc: but_calc
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
         padding: 75, 100, 75, 75
         spacing: 50
-
         Button:
-
+            id: but_form
             text: "Формулы"
             font_size: "32sp"
         Button:
-
+            id: but_calc
             text: "Калькулятор"
             font_size: "32sp"
             on_release:
                 app.root.current = "calc"
                 root.manager.transition.direction = "left"
-
         BoxLayout:
             padding: 100, 100, 100, 0
             spacing: 50
@@ -52,21 +49,22 @@ WindowManager:
                 text: "Ru"
                 state: "down"
                 group: "lang"
-
+                on_press:
+                    app.Ru_En('ru')
             ToggleButton:
                 text: "En"
                 group: "lang"
-
-
-
+                on_press:
+                    app.Ru_En('en')
 <CalcWindow>:
     name: "calc"
     calc_lab: calc_lab
-
+    but_bak: but_bak
     BoxLayout:
         orientation: "vertical"
         padding: 25
         Button:
+            id: but_bak
             text: "назад"
             size_hint: 0.2, 0.1
             font_size: "16sp"
@@ -86,7 +84,6 @@ WindowManager:
             size_hint: 1, 0.6
             cols: 4
             Widget:
-
             Button:
                 text: "c"
                 on_release:
@@ -95,7 +92,6 @@ WindowManager:
                 text: "**"
                 on_release:
                     root.add_operation("**")
-
             Button:
                 text: "/"
                 on_release:
@@ -149,7 +145,6 @@ WindowManager:
                 on_release:
                     root.add_operation("+")
             Widget:
-
             Button:
                 text: "0"
                 on_release:
@@ -162,15 +157,7 @@ WindowManager:
                 text: "="
                 on_release:
                     root.calc_result("=")
-
-
-
-
 <ChoiceWindow>:
     name: "choice"
-
-
 <InfoWindow>:
     name: "info"
-
-

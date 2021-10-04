@@ -11,14 +11,37 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from math import *
 
 
+#    but_bak = ObjectProperty()
+#    but_form = ObjectProperty()
+#    but_calc = ObjectProperty()
+
+
 class MainWindow(Screen):
-    def Ru_En(self, lang):
-        pass
+    but_form = ObjectProperty()
+    but_calc = ObjectProperty()
+
+
+#    def Ru_En(self, lang):
+#        if lang == "ru":
+#            self.but_form.text = "Формулы"
+#            self.but_calc.text = "Калькулятор"
+#
+#        elif lang == "en":
+#            self.but_form.text = "formulas"
+#            self.but_calc.text = "Calculator"
 
 
 class CalcWindow(Screen):
     calc_lab = ObjectProperty()
+    but_bak = ObjectProperty()
     formula = '0'
+
+    #    def Ru_En(self, lang):
+    #        if lang == "ru":
+    #            self.but_bak.text = "назад"
+    #
+    #        elif lang == "en":
+    #            self.but_bak.text = "back"
 
     def add_number(self, instance):
         print(instance)
@@ -44,14 +67,14 @@ class CalcWindow(Screen):
         self.formula = '0'
         self.update_label()
 
-#    def sqrt_text(self):
-#        try:
-#            self.calc_lab.text = int(self.calc_lab.text)
-#
-#        except:
-#            self.calc_lab.text = str(eval('sqrt(self.calc_lab.text)'))
-#        finally:
-#            self.update_label()
+    #    def sqrt_text(self):
+    #        try:
+    #            self.calc_lab.text = int(self.calc_lab.text)
+    #
+    #        except:
+    #            self.calc_lab.text = str(eval('sqrt(self.calc_lab.text)'))
+    #        finally:
+    #            self.update_label()
 
     def update_label(self):
         print(self.formula)
@@ -74,6 +97,26 @@ kv = Builder.load_file("main.kv")
 
 
 class MyApp(App):
+    a = MainWindow()
+    c = CalcWindow()
+
+    def Ru_En(self, lang):
+        if lang == "ru":
+            self.a.but_form.text = "Формулы"
+            self.a.but_calc.text = "Калькулятор"
+            self.c.but_bak.text = "назад"
+            return (self.a.but_form.text,
+                    self.a.but_calc.text,
+                    self.c.but_bak.text)
+
+        elif lang == "en":
+            self.a.but_form.text = "formulas"
+            self.a.but_calc.text = "Calculator"
+            self.c.but_bak.text = "back"
+
+            return (self.a.but_form.text,
+                    self.a.but_calc.text,
+                    self.c.but_bak.text)
 
     def build(self):
         return kv
