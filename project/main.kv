@@ -1,8 +1,4 @@
-WindowManager:
-    MainWindow:
-    CalcWindow:
-    ChoiceWindow:
-    InfoWindow:
+
 
 # calc_lab: calc_lab
 
@@ -31,10 +27,29 @@ WindowManager:
         size: root.width, root.height
         padding: 75, 100, 75, 75
         spacing: 50
+        FloatLayout:
+            ToggleButton:
+                pos_hint: {'x': .93, 'y': 1}
+                size_hint: .2, .2
+                text: "Ru"
+                state: "down"
+                group: "lang"
+                on_press:
+                    root.Ru_En('ru')
+            ToggleButton:
+                pos_hint: {'x': .7, 'y': 1}
+                size_hint: .2, .2
+                text: "En"
+                group: "lang"
+                on_press:
+                    root.Ru_En('en')
         Button:
             id: but_form
             text: "Формулы"
             font_size: "32sp"
+            on_release:
+                app.root.current = "choice"
+                root.manager.transition.direction = "left"
         Button:
             id: but_calc
             text: "Калькулятор"
@@ -42,30 +57,16 @@ WindowManager:
             on_release:
                 app.root.current = "calc"
                 root.manager.transition.direction = "left"
-        BoxLayout:
-            padding: 100, 100, 100, 0
-            spacing: 50
-            ToggleButton:
-                text: "Ru"
-                state: "down"
-                group: "lang"
-                on_press:
-                    app.Ru_En('ru')
-            ToggleButton:
-                text: "En"
-                group: "lang"
-                on_press:
-                    app.Ru_En('en')
+
+
 <CalcWindow>:
     name: "calc"
     calc_lab: calc_lab
-    but_bak: but_bak
     BoxLayout:
         orientation: "vertical"
         padding: 25
         Button:
-            id: but_bak
-            text: "назад"
+            text: "<--"
             size_hint: 0.2, 0.1
             font_size: "16sp"
             on_release:
@@ -159,5 +160,11 @@ WindowManager:
                     root.calc_result("=")
 <ChoiceWindow>:
     name: "choice"
+    Button:
+        id: but_bak
+        text: "назад"
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
 <InfoWindow>:
     name: "info"

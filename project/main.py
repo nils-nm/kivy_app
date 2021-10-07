@@ -1,5 +1,5 @@
 from kivy.app import App
-from kivy.lang.builder import Builder
+from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
@@ -9,7 +9,7 @@ from kivy.uix.label import Label
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from math import *
-
+Builder.load_file("main.kv")
 
 #    but_bak = ObjectProperty()
 #    but_form = ObjectProperty()
@@ -20,20 +20,21 @@ class MainWindow(Screen):
     but_form = ObjectProperty()
     but_calc = ObjectProperty()
 
+    def Ru_En(self, lang):
+        if lang == "ru":
+            self.but_form.text = "Формулы"
+            self.but_calc.text = "Калькулятор"
+            sm.get_screen('choice').ids.but_bak.text = "назад"
 
-#    def Ru_En(self, lang):
-#        if lang == "ru":
-#            self.but_form.text = "Формулы"
-#            self.but_calc.text = "Калькулятор"
-#
-#        elif lang == "en":
-#            self.but_form.text = "formulas"
-#            self.but_calc.text = "Calculator"
+        elif lang == "en":
+            self.but_form.text = "formulas"
+            self.but_calc.text = "Calculator"
+            sm.get_screen("choice").ids.but_bak.text = "back"
 
 
 class CalcWindow(Screen):
     calc_lab = ObjectProperty()
-    but_bak = ObjectProperty()
+
     formula = '0'
 
     #    def Ru_En(self, lang):
@@ -44,7 +45,6 @@ class CalcWindow(Screen):
     #            self.but_bak.text = "back"
 
     def add_number(self, instance):
-        print(instance)
         if self.formula == "0":
             self.formula = ""
 
@@ -77,7 +77,6 @@ class CalcWindow(Screen):
     #            self.update_label()
 
     def update_label(self):
-        print(self.formula)
         self.calc_lab.text = self.formula
 
 
@@ -89,37 +88,39 @@ class InfoWindow(Screen):
     pass
 
 
-class WindowManager(ScreenManager):
-    pass
+# class Uprava(MainWindow, CalcWindow):
 
 
-kv = Builder.load_file("main.kv")
+# class WindowManager(ScreenManager):
+#    pass
+
+
+# WindowManager().add_widget(MainWindow(name="main"))
+# WindowManager().add_widget(CalcWindow(name="calc"))
+# WindowManager().add_widget(ChoiceWindow(name="choice"))
+# WindowManager().add_widget(InfoWindow(name="info"))
+
+
+sm = ScreenManager()
+sm.add_widget(MainWindow(name='main'))
+sm.add_widget(CalcWindow(name='calc'))
+sm.add_widget(ChoiceWindow(name='choice'))
 
 
 class MyApp(App):
-    a = MainWindow()
-    c = CalcWindow()
+    #    but_form = ObjectProperty()
+    #    but_calc = ObjectProperty()
 
-    def Ru_En(self, lang):
-        if lang == "ru":
-            self.a.but_form.text = "Формулы"
-            self.a.but_calc.text = "Калькулятор"
-            self.c.but_bak.text = "назад"
-            return (self.a.but_form.text,
-                    self.a.but_calc.text,
-                    self.c.but_bak.text)
-
-        elif lang == "en":
-            self.a.but_form.text = "formulas"
-            self.a.but_calc.text = "Calculator"
-            self.c.but_bak.text = "back"
-
-            return (self.a.but_form.text,
-                    self.a.but_calc.text,
-                    self.c.but_bak.text)
+    #    def Ru_En(self, lang):
+    #        if lang == "ru":
+    #            self.but_form.text = "Формулы"
+    #            self.but_calc.text = "Калькулятор"
+    #        elif lang == "en":
+    #            self.but_form.text = "formulas"
+    #            self.but_calc.text = "Calculator"
 
     def build(self):
-        return kv
+        return sm
 
 
 if __name__ == "__main__":
