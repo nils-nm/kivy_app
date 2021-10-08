@@ -20,16 +20,22 @@ class MainWindow(Screen):
     but_form = ObjectProperty()
     but_calc = ObjectProperty()
 
+    # def button_down(self, but):
+    #     if but == 'but_form':
+    #         self.ids.but_form_img.source = 'button_press_1.png'
+    #
+    # def button_up(self, but):
+    #     if but == 'but_form':
+    #         self.ids.but_form_img.source = 'button_1.png'
+
     def Ru_En(self, lang):
         if lang == "ru":
             self.but_form.text = "Формулы"
             self.but_calc.text = "Калькулятор"
-            sm.get_screen('choice').ids.but_bak.text = "назад"
 
         elif lang == "en":
             self.but_form.text = "formulas"
             self.but_calc.text = "Calculator"
-            sm.get_screen("choice").ids.but_bak.text = "back"
 
 
 class CalcWindow(Screen):
@@ -81,11 +87,16 @@ class CalcWindow(Screen):
 
 
 class ChoiceWindow(Screen):
-    pass
+    def choice(self, func):
+        if func == '1':
+            sm.get_screen('info').ids.but_inf_bak.text = '1'
+        elif func == '2':
+            sm.get_screen('info').ids.but_inf_bak.text = '2'
 
 
 class InfoWindow(Screen):
-    pass
+    def spinner(self, value):
+        self.ids.label.text = value
 
 
 # class Uprava(MainWindow, CalcWindow):
@@ -105,6 +116,7 @@ sm = ScreenManager()
 sm.add_widget(MainWindow(name='main'))
 sm.add_widget(CalcWindow(name='calc'))
 sm.add_widget(ChoiceWindow(name='choice'))
+sm.add_widget(InfoWindow(name='info'))
 
 
 class MyApp(App):

@@ -32,7 +32,7 @@ class PlaylistWidget(ScrollView):
 kv = '''
 PlaylistWidget:
     bar_width: 50
-    size_hint: 1, .1
+    size_hint: 1, .5
     scroll_type: ['bars']
     bar_inactive_color: 5, 20, 10, .5
     bar_color: 5, 10, 15, .8
@@ -44,7 +44,7 @@ PlaylistWidget:
         row_default_height: '20dp'
         row_force_default: True
         size_hint_y: None
-        height: 500
+        height: 50
 '''
 
 
@@ -53,5 +53,6 @@ class TestApp(App):
         pl = Builder.load_string(kv)
         Clock.schedule_once(pl.add_labels)
         return pl
+
 
 TestApp().run()
