@@ -234,13 +234,30 @@
     	    Spinner:
     		    size_hint: 1, .7
     		    pos_hint: {'x': 1, 'y': .25}
-    		    text: "---"
-    		    values: "теория","примеры","практика","тематический калькулятор"
+    		    text: "теория"
+    		    values: "теория","примеры","практика","тк"
     		    on_text:
     		        root.spinner(self.text)
 
-        Label:
-    	    id: label
-    	    text: ''
-    	    size_hint: 1, .9
+        ScrollView:
+            size_hint_y: 0.9
+            do_scroll_x: False
+            do_scroll_y: True
+
+            GridLayout:
+                # spacing: 10
+                # padding: 25, 0, 25, 25
+                size: (root.width, root.height)
+                size_hint_x: None
+    		    size_hint_y: None
+    		    cols: 1
+    		    height: self.minimum_height
+                RstDocument:
+    	            id: label
+    	            # halign: 'left'
+    	            # valign: 'top'
+    	            text_size: self.size
+    	            text: '.. top_:\n\nСложение чисел\n----\n\n::\n\n$ a+b=c\n'
+
+
 
